@@ -1,0 +1,39 @@
+Peer to peer chat program.
+- Every Client also has a server implemented so that communication can be established from any client.
+- Can have peer to peer group conversations, as such:
+
+     C4
+     /
+    /
+   /
+  /
+ /
+C1======================================C2
+                                         \
+                                          \
+                                           \
+                                            \
+                                             \
+                                              \
+                                              C3
+
+Where C1 and C2 already have an established connection, C3 and C4 can connect with C1 and C2 (respectively)
+by establishing a connection with C2 and C1 (also respectively), stating that the "channel" of communication
+should be the one C1 and C2 are already communicating with.
+That way, communication accross a channel can be routed to all channel members through the connected peers.
+
+
+Functionality needed:
+
+- Connection management
+1. TCP Server - listen on a certain port, add created connection sockets to the Connection Database.
+2. Connection Database - A database of existing connections (connection ID, socket object, socket details (IPs, ports)).
+3. Establish Connection - exchange channel information for a connection, and update the Channel Database with it.
+4. Channel Database - database of existing channels and connections which are part of them (channel, connection IDs, channel IN, channel OUT).
+
+- Connection Activities
+1. Send - send data to a connection at a certain connection ID, with corresponding channel headers.
+2. Receive - receive data from a connection, and according to the channel header forward the data to the channel output.
+
+- IO
+1. Channel IN and OUT - different options for Input and Output to a channel - files, console IO...
