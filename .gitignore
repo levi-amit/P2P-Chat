@@ -1,5 +1,5 @@
 .vscode/
 
-build/bin/
-build/obj/
-build/dump/
+build/bin
+build/objects
+build/dump
